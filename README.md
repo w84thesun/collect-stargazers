@@ -1,0 +1,1 @@
+Simple Python script that uses the GitHub GraphQL API to query a repository's stargazers. The script takes in a repository owner and name as arguments and returns a CSV file containing the usernames of the stargazers. The script requires a personal access token for authentication, which should be stored in the githubToken variable.

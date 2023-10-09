@@ -1,4 +1,5 @@
 import requests
+
 import csv
 
 githubURI = 'https://api.github.com/graphql'
@@ -59,23 +60,23 @@ def process_response(response):
 
 
 def main():
-	file = open('stargazers.csv', 'w', newline='')
+  file = open('stargazers.csv', 'w', newline='')
 
-	writer = csv.writer(file)
-	writer.writerow(["Login", "StarredAt"])
+  writer = csv.writer(file)
+  writer.writerow(["Login", "StarredAt"])
 
-	response = query_repo("ORG", "REPO")
-	stargazers, hasNextPage, cur = process_response(response)
+  response = query_repo("ORG", "REPO")
+  stargazers, hasNextPage, cur = process_response(response)
 
-	while hasNextPage:
-	    for x in stargazers:
-	        writer.writerow([x['node']['login'], x['starredAt']])
+  while hasNextPage:
+    for x in stargazers:
+      writer.writerow([x['node']['login'], x['starredAt']])
 
-	    response = query_repo('ORG', 'REPO', cur)
+    response = query_repo('ORG', 'REPO', cur)
 
-	    stargazers, hasNextPage, cur = process_response(response)
-	    
-	writer.close()
+    stargazers, hasNextPage, cur = process_response(response)
+
+  writer.close()
 
 
 
